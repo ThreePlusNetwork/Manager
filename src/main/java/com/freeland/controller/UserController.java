@@ -50,7 +50,7 @@ public class UserController {
         return userPossession.getScore();
     }
 
-    @RequestMapping(value = "/user/score",method = RequestMethod.GET)
+    @RequestMapping(value = "/user/token",method = RequestMethod.GET)
     @ApiOperation(value = "获取用户token数量", notes = "通过用户id获取用户token数量", httpMethod = "GET")
     public Long retrieveUserToken(@RequestParam(name = "id") Long id){
         UserPossession userPossession = userPossessionService.findByUserId(id);
