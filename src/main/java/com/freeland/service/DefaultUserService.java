@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  *
@@ -32,6 +33,11 @@ public class DefaultUserService implements UserService{
 
     @Override
     public User findById(Long id) {
-        return userRepository.findById(id).orElse(null);
+        Optional<User> option = userRepository.findById(id);
+        if (!option.isPresent()) {
+            log.error("can not found user by userId:{}", id);
+            return null;
+        }
+        return option.get();
     }
 }

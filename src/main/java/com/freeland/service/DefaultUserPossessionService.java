@@ -18,6 +18,11 @@ public class DefaultUserPossessionService implements UserPossessionService {
 
     @Override
     public UserPossession findByUserId(Long userId) {
-        return userPossessionRepository.findByUserId(userId);
+        UserPossession userPossession = userPossessionRepository.findByUserId(userId);
+        if (userPossession == null) {
+            log.error("can not found userPossession by userId:{}", userId);
+            return null;
+        }
+        return userPossession;
     }
 }

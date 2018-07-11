@@ -45,6 +45,7 @@ public class UserController {
     public Long retrieveUserScore(@RequestParam(name = "id") Long id){
         UserPossession userPossession = userPossessionService.findByUserId(id);
         if (userPossession == null) {
+
             return null;
         }
         return userPossession.getScore();
