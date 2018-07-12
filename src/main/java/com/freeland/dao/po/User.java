@@ -12,7 +12,9 @@ import java.util.Collection;
 import java.util.Date;
 
 /**
- * Created by heiqie on 2018/7/11.
+ *
+ * @author heiqie
+ * @date 2018/7/11
  */
 @Data
 @Table(name = "user")
