@@ -35,14 +35,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("swagger-ui.html");
-        super.configure(web);
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security", "/webjars/**","/swagger-ui.html");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/swagger-ui.html").permitAll()
+                .antMatchers("/").permitAll()
                 .anyRequest().authenticated();
         //解决非thymeleaf的form表单提交被拦截问题
         http.csrf().disable();
