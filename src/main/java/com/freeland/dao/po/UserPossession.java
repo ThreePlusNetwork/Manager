@@ -27,7 +27,7 @@ public class UserPossession {
 
     private Long userId;
 
-    private Long score;
+    private Long gold;
 
     private Long token;
     

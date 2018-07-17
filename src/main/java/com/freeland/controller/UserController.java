@@ -1,16 +1,17 @@
 package com.freeland.controller;
 
+import com.freeland.constant.InteractionType;
 import com.freeland.dao.po.User;
 import com.freeland.dao.po.UserPossession;
+import com.freeland.model.Interaction;
 import com.freeland.model.ResponseWrapper;
+import com.freeland.model.TokenTransfer;
+import com.freeland.service.InteractionService;
 import com.freeland.service.UserPossessionService;
 import com.freeland.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 
@@ -26,6 +27,9 @@ public class UserController {
 
     @Autowired
     private UserPossessionService userPossessionService;
+
+    @Autowired
+    private InteractionService interactionService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ApiOperation(value = "测试", notes = "测试", httpMethod = "GET")
@@ -51,14 +55,21 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/user/score", method = RequestMethod.GET)
+    @RequestMapping(value = "/user/gold", method = RequestMethod.GET)
     @ApiOperation(value = "获取用户金币", notes = "通过用户id获取用户金币数量", httpMethod = "GET")
-    public Long retrieveUserScore(@NotBlank @RequestParam(name = "id") Long id) {
+    public Long retrieveUserGold(@NotBlank @RequestParam(name = "id") Long id) {
         UserPossession userPossession = userPossessionService.findByUserId(id);
         if (userPossession == null) {
             return null;
         }
-        return userPossession.getScore();
+        return userPossession.getGold();
+    }
+
+    @RequestMapping(value = "/user/interaction", method = RequestMethod.POST)
+    @ApiOperation(value = "用户交互接口", notes = "用户交互接口", httpMethod = "POST")
+    public ResponseWrapper<Long> interaction(@RequestBody Interaction interaction) {
+        Long updatedGoldBalance = interactionService.handle(interaction.getUserId(), InteractionType.getByNumber(interaction.getInteractionType()));
+        return ResponseWrapper.success(updatedGoldBalance);
     }
 
     @RequestMapping(value = "/user/token", method = RequestMethod.GET)
@@ -70,4 +81,11 @@ public class UserController {
         }
         return userPossession.getToken();
     }
+
+    @RequestMapping(value = "/user/token/transfer", method = RequestMethod.POST)
+    @ApiOperation(value = "用户转账token", notes = "用户转账token", httpMethod = "POST")
+    public ResponseWrapper<String> transferToken(@RequestBody TokenTransfer tokenTransfer) {
+        return ResponseWrapper.success("ok");
+    }
+
 }

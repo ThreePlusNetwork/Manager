@@ -11,4 +11,6 @@ public interface UserPossessionService {
 
     UserPossession findByUserId(Long userId);
 
+    UserPossession save(UserPossession userPossession);
+
 }

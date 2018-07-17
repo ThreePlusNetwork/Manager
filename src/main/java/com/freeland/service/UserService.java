@@ -10,7 +10,7 @@ import java.util.List;
  * @author heiqie
  * @date 2018/7/11
  */
-public interface UserService extends UserDetailsService {
+public interface UserService  {
 
 
     User findByName(String name);

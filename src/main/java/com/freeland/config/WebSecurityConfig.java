@@ -22,13 +22,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    private UserService userService;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService);
-    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {

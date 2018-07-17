@@ -25,4 +25,9 @@ public class DefaultUserPossessionService implements UserPossessionService {
         }
         return userPossession;
     }
+
+    @Override
+    public UserPossession save(UserPossession userPossession) {
+        return userPossessionRepository.save(userPossession);
+    }
 }

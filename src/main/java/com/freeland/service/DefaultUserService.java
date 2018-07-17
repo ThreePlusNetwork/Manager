@@ -60,9 +60,4 @@ public class DefaultUserService implements UserService{
         return false;
     }
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
-    }
 }
