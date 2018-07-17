@@ -13,4 +13,7 @@ public interface UserPossessionService {
 
     UserPossession save(UserPossession userPossession);
 
+    UserPossession requestBounty(Long userId);
+
+
 }

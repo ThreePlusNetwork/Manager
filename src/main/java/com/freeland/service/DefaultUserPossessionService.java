@@ -30,4 +30,21 @@ public class DefaultUserPossessionService implements UserPossessionService {
     public UserPossession save(UserPossession userPossession) {
         return userPossessionRepository.save(userPossession);
     }
+
+    @Override
+    public UserPossession requestBounty(Long userId) {
+        UserPossession userPossession = userPossessionRepository.findByUserId(userId);
+        if (userPossession == null) {
+            userPossession = UserPossession.builder().userId(userId)
+                    .gold(0L)
+                    .token(0L)
+                    .build();
+        }
+        Long beforeGoldBalance = userPossession.getGold();
+        Long newGoldBalance = beforeGoldBalance + 100L;
+        userPossession.setGold(newGoldBalance);
+        UserPossession updatedPossession = save(userPossession);
+        log.info("userId:{},before gold:{},now gold", userId, beforeGoldBalance, newGoldBalance);
+        return updatedPossession;
+    }
 }

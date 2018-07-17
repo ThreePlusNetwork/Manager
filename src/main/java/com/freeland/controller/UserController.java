@@ -88,4 +88,16 @@ public class UserController {
         return ResponseWrapper.success("ok");
     }
 
+
+    @RequestMapping(value = "/user/bounty", method = RequestMethod.POST)
+    @ApiOperation(value = "用户转账token", notes = "用户转账token", httpMethod = "POST")
+    public ResponseWrapper<Long> requestBounty(@NotBlank @RequestParam(name = "id") Long id) {
+        UserPossession userPossession = userPossessionService.requestBounty(id);
+        return ResponseWrapper.success(userPossession.getGold());
+    }
+
+
+
+
+
 }
