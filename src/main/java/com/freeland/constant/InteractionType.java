@@ -1,7 +1,9 @@
 package com.freeland.constant;
 
 /**
- * Created by heiqie on 2018/7/17.
+ *
+ * @author heiqie
+ * @date 2018/7/17
  */
 public enum InteractionType {
     SEND_ROSE(10, 10, "送花"),

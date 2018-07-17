@@ -1,11 +1,13 @@
 package com.freeland.constant;
 
 /**
- * Created by heiqie on 2018/7/17.
+ *
+ * @author heiqie
+ * @date 2018/7/17
  */
 public enum  Error {
 
-    NOT_ENOUGH(600,"请确认你有足够的金币");
+    NOT_ENOUGH_GOLD(600,"请确认你有足够的金币");
     private int code;
     private String msg;
 

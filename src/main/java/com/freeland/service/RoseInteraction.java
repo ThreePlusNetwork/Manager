@@ -21,12 +21,12 @@ public class RoseInteraction extends AbstractInteraction implements Interaction 
         UserPossession userPossession = userPossessionService.findByUserId(userId);
         if (userPossession == null || userPossession.getGold() == null) {
             log.warn("user have not gold possession:{}", userId);
-            throw new InteractionException(Error.NOT_ENOUGH.getCode(), Error.NOT_ENOUGH.getMsg());
+            throw new InteractionException(Error.NOT_ENOUGH_GOLD.getCode(), Error.NOT_ENOUGH_GOLD.getMsg());
         }
         int goldBalance = userPossession.getGold().intValue();
         int burnedGold = interactionType.getBurnedGold();
         if (burnedGold > goldBalance) {
-            throw new InteractionException(Error.NOT_ENOUGH.getCode(), Error.NOT_ENOUGH.getMsg());
+            throw new InteractionException(Error.NOT_ENOUGH_GOLD.getCode(), Error.NOT_ENOUGH_GOLD.getMsg());
         }
         int remainedBalance = goldBalance - burnedGold;
         userPossession.setGold((long) remainedBalance);
