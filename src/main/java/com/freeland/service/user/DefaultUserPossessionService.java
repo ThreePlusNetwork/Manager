@@ -1,7 +1,8 @@
-package com.freeland.service;
+package com.freeland.service.user;
 
 import com.freeland.dao.po.UserPossession;
 import com.freeland.dao.repositoy.UserPossessionRepository;
+import com.freeland.service.user.UserPossessionService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

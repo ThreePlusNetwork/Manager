@@ -1,15 +1,12 @@
-package com.freeland.service;
+package com.freeland.service.user;
 
 import com.freeland.dao.po.User;
 import com.freeland.dao.repositoy.UserRepository;
+import com.freeland.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,7 +16,7 @@ import java.util.Optional;
  */
 @Slf4j
 @Service
-public class DefaultUserService implements UserService{
+public class DefaultUserService implements UserService {
 
     @Autowired
     private UserRepository userRepository;

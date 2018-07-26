@@ -1,4 +1,4 @@
-package com.freeland.service;
+package com.freeland.service.interaction;
 
 import com.freeland.constant.InteractionType;
 import lombok.extern.slf4j.Slf4j;

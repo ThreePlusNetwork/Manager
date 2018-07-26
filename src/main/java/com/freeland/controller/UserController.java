@@ -6,9 +6,9 @@ import com.freeland.dao.po.UserPossession;
 import com.freeland.model.Interaction;
 import com.freeland.model.ResponseWrapper;
 import com.freeland.model.TokenTransfer;
-import com.freeland.service.InteractionService;
-import com.freeland.service.UserPossessionService;
-import com.freeland.service.UserService;
+import com.freeland.service.interaction.InteractionService;
+import com.freeland.service.user.UserPossessionService;
+import com.freeland.service.user.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -68,7 +68,7 @@ public class UserController {
     @RequestMapping(value = "/user/interaction", method = RequestMethod.POST)
     @ApiOperation(value = "用户交互接口", notes = "用户交互接口", httpMethod = "POST")
     public ResponseWrapper<Long> interaction(@RequestBody Interaction interaction) {
-        Long updatedGoldBalance = interactionService.handle(interaction.getUserId(), InteractionType.getByNumber(interaction.getInteractionType()));
+        Long updatedGoldBalance = interactionService.handle(interaction.getConnectedUserId(), InteractionType.getByNumber(interaction.getInteractionType()));
         return ResponseWrapper.success(updatedGoldBalance);
     }
 
@@ -92,6 +92,16 @@ public class UserController {
     @RequestMapping(value = "/user/bounty", method = RequestMethod.POST)
     @ApiOperation(value = "水龙头测试使用", notes = "水龙头测试使用", httpMethod = "POST")
     public ResponseWrapper<Long> requestBounty(@NotBlank @RequestParam(name = "id") Long id) {
+        UserPossession userPossession = userPossessionService.requestBounty(id);
+        return ResponseWrapper.success(userPossession.getGold());
+    }
+
+
+
+    @RequestMapping(value = "/user/createWallet", method = RequestMethod.POST)
+    @ApiOperation(value = "创建钱包", notes = "创建钱包", httpMethod = "POST")
+    public ResponseWrapper<Long> requestBounty(@RequestParam(name = "id") Long id,
+                                               @RequestParam(name = "password") String password) {
         UserPossession userPossession = userPossessionService.requestBounty(id);
         return ResponseWrapper.success(userPossession.getGold());
     }

@@ -1,5 +1,7 @@
-package com.freeland.service;
+package com.freeland.service.interaction;
 
+import com.freeland.service.user.UserPossessionService;
+import com.freeland.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

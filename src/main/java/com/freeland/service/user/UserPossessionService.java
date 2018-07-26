@@ -1,4 +1,4 @@
-package com.freeland.service;
+package com.freeland.service.user;
 
 import com.freeland.dao.po.UserPossession;
 

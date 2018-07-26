@@ -4,37 +4,32 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.Date;
 
 /**
- *
- * @author heiqie
- * @date 2018/7/11
+ * Created by heiqie on 2018/7/17.
+ * 用户连线表
  */
 @Data
-@Table(name = "user")
+@Table(name = "user_connection")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
-
+public class UserConnection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
-    private String username;
+    private Long sendUserId;
 
-    private String password;
+    private Long receiveUserId;
 
-    private String email;
+    private Long interactionType;
 
-    private int age;
+
 
     private Date createdTime;
 
@@ -43,8 +38,4 @@ public class User {
     private String createdBy;
 
     private String updatedBy;
-
-    private String status;
-
-
 }
