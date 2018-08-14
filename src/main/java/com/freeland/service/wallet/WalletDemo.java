@@ -1,8 +1,14 @@
 package com.freeland.service.wallet;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.freeland.dao.po.EthHDWallet;
 import lombok.extern.slf4j.Slf4j;
+import org.bitcoinj.crypto.*;
 import org.bitcoinj.wallet.DeterministicSeed;
+import org.springframework.util.StringUtils;
 import org.web3j.crypto.*;
+import org.web3j.protocol.ObjectMapperFactory;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.DefaultBlockParameter;
 import org.web3j.protocol.core.methods.response.EthGetBalance;
@@ -10,16 +16,21 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.protocol.http.HttpService;
 import org.web3j.tx.Transfer;
 import org.web3j.utils.Convert;
+import org.web3j.utils.Numeric;
 
 import java.io.File;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author heiqie
  */
 @Slf4j
+
 public class WalletDemo {
     private Web3j web3j;
     private Credentials credentials;
@@ -31,11 +42,12 @@ public class WalletDemo {
 
     private void web3jInit() throws Exception {
         log.info("init web3j");
+        //生成助记词
         ethClient();//连接以太坊客户端 connect to eth wallet
 //        createAccount();//创建冷钱包 generate cold wallet
 //        loadWallet();//加载钱包 load wallet
 //        loadByMnemonic("capable demand jungle assist dignity sheriff wine rose middle physical harvest key","");
-        generateBip39WalletAndLoadByMnemonic();
+//        generateBip39WalletAndLoadByMnemonic();
 //        getBalanceOfETH();//查询账户余额 query balance
 //        transferTo();//转账到指定地址 transfer to specific address
 //        generateMnemonic();
@@ -64,6 +76,8 @@ public class WalletDemo {
         log.info("private key:{}", credentials.getEcKeyPair().getPrivateKey());
         return credentials;
     }
+
+
 
     /**
      * 以太坊客户端

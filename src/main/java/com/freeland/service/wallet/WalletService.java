@@ -1,5 +1,7 @@
 package com.freeland.service.wallet;
 
+import com.freeland.dao.po.EthHDWallet;
+
 /**
  *
  * @author heiqie
@@ -7,5 +9,9 @@ package com.freeland.service.wallet;
  */
 public interface WalletService {
 
-
+    EthHDWallet generateHDWallet(String password);
 }
+
+
+
+
